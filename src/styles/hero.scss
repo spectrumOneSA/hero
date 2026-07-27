@@ -1,0 +1,168 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  font-family: Inter, sans-serif;
+}
+
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    right: -20%;
+    top: 50%;
+
+    width: 850px;
+    height: 850px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+      circle,
+      rgba(142, 189, 63, 0.22) 0%,
+      rgba(142, 189, 63, 0.10) 28%,
+      rgba(142, 189, 63, 0.03) 55%,
+      transparent 78%
+    );
+
+    filter: blur(70px);
+
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(
+      circle at center,
+      transparent 40%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.heroText {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: min(620px, 42vw);
+  margin-left: clamp(2rem, 8vw, 8rem);
+
+  color: #fff;
+  text-align: left;
+  pointer-events: none;
+
+  .heroEyebrow {
+    margin-bottom: .65rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: #8ebd3f;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 4.6vw, 4.9rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    margin-top: 1.75rem;
+    max-width: 38rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.72);
+  }
+}
+
+.heroEyebrow,
+.heroText h1,
+.heroText p {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.heroEyebrow {
+  animation-delay: 0.2s;
+}
+
+.heroText h1 {
+  animation-delay: 0.35s;
+}
+
+.heroText p {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroEyebrow,
+  .heroText h1,
+  .heroText p {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+canvas {
+  opacity: 0;
+  animation: canvasFade 1s ease forwards;
+}
+
+@keyframes canvasFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
