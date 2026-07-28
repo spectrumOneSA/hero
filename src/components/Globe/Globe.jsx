@@ -1,10 +1,9 @@
-import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import useGlobeEngine from "./useGlobeEngine";
 import Strands from "./Strands";
 import SignalParticles from "./SignalParticles";
 
-export default function Globe() {
+export default function Globe({ mobile }) {
     const {
         group,
         positions,
@@ -12,7 +11,11 @@ export default function Globe() {
     } = useGlobeEngine();
 
     return (
-        <group ref={group} position={[4.6, 0, 0]} scale={0.90}>
+        <group
+            ref={group}
+            position={mobile ? [0, -5.1, 0] : [4.6, 0, 0]}
+            scale={mobile ? 0.75 : 0.90}
+        >
             <points>
                 <bufferGeometry>
                     <bufferAttribute

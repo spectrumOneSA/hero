@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import Globe from "./Globe/Globe";
 import Stars from "./Stars";
 import Snow from "./Snow";
 
 export default function Scene() {
+  const [mobile, setMobile] = useState(window.innerWidth <= 1024);
+
+  useEffect(() => {
+    const onResize = () => {
+      setMobile(window.innerWidth <= 1024);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <>
       <ambientLight intensity={0.12} />
@@ -34,7 +47,7 @@ export default function Scene() {
 
       <Stars />
       <Snow />
-      <Globe />
+      <Globe mobile={mobile} />
 
       <EffectComposer>
         <Bloom
