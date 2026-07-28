@@ -26,8 +26,7 @@ export default function Globe({ mobile }) {
                     />
                 </bufferGeometry>
 
-                <pointsMaterial
-                    color="#457000"
+                <pointsMaterial color={mobile ? "#243a01" : "#457000"}
                     size={0.04}
                     transparent
                     opacity={0.9}
